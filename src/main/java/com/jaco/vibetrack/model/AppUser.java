@@ -1,18 +1,19 @@
 package com.jaco.vibetrack.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "app_user") // opcional, mas evita conflito de nomes
 public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "username") // garante que o JSON saia com "username"
     private String username;
+
+    @Column(name = "email")
     private String email;
 
     public AppUser() {}

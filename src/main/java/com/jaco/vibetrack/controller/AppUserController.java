@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200") // permite que o Angular acesse
 @RestController
 @RequestMapping("/users")
 public class AppUserController {
@@ -26,7 +27,9 @@ public class AppUserController {
     @GetMapping
     public List<AppUser> getAllUsers() {
         return repository.findAll();
-    }// Atualizar usuário pelo id
+    }
+
+    // Atualizar usuário pelo id (PUT)
     @PutMapping("/{id}")
     public AppUser updateUser(@PathVariable Long id, @RequestBody AppUser userDetails) {
         AppUser user = repository.findById(id)
@@ -36,13 +39,13 @@ public class AppUserController {
         user.setEmail(userDetails.getEmail());
 
         return repository.save(user);
-    }// Deletar usuário pelo id
+    }
+
+    // Deletar usuário pelo id (DELETE)
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable Long id) {
         repository.deleteById(id);
         return "Usuário com id " + id + " deletado com sucesso!";
     }
 
-
 }
-
